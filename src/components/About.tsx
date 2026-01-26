@@ -1,12 +1,7 @@
-import { Calendar, Cpu, MapPin } from 'lucide-react';
+import { Cpu, MapPin } from 'lucide-react';
 
 function About() {
   const stats = [
-    {
-      icon: Calendar,
-      label: 'Years Old',
-      value: '19',
-    },
     {
       icon: Cpu,
       label: 'Primary Tool',
@@ -33,7 +28,7 @@ function About() {
             </h2>
             <div className="space-y-4 text-gray-300 leading-relaxed">
               <p>
-                Hi, I'm Priyanshu — a 19-year-old CG/3D artist from India creating cinematic visuals and digital work using Blender 3D. I specialize in crafting stunning 3D animations, VFX, and visual storytelling that brings imagination to life.
+                Hi, I'm Priyanshu — a CG/3D artist from India creating cinematic visuals and digital work using Blender 3D. I specialize in crafting stunning 3D animations, VFX, and visual storytelling that brings imagination to life.
               </p>
               <p>
                 Every project is a journey from concept to reality, pixel by pixel. Whether it's creating immersive 3D environments, dynamic character animations, or breathtaking visual effects, I'm passionate about pushing the boundaries of what's possible in the digital realm.

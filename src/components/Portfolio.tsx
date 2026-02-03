@@ -8,58 +8,80 @@ interface Project {
   title: string;
   description: string;
   category: Category;
-  image: string;
+  reelUrl: string;
 }
+
 
 function Portfolio() {
   const [activeCategory, setActiveCategory] = useState<Category>('All');
 
   const categories: Category[] = ['All', '3D', 'VFX', 'CGI'];
 
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: 'Neon City Chronicles',
-      description: 'Cinematic 3D cityscape created in Blender with dynamic lighting and atmospheric effects',
-      category: '3D',
-      image: 'https://images.pexels.com/photos/2422259/pexels-photo-2422259.jpeg?auto=compress&cs=tinysrgb&w=800',
-    },
-    {
-      id: 2,
-      title: 'Abstract Dimensions',
-      description: '3D geometric visualization in Blender exploring form, space, and light dynamics',
-      category: '3D',
-      image: 'https://images.pexels.com/photos/1619654/pexels-photo-1619654.jpeg?auto=compress&cs=tinysrgb&w=800',
-    },
-    {
-      id: 3,
-      title: 'Studio Production Setup',
-      description: 'Behind-the-scenes: 3D workflow and rendering pipeline in Blender',
-      category: 'CGI',
-      image: 'https://images.pexels.com/photos/1279813/pexels-photo-1279813.jpeg?auto=compress&cs=tinysrgb&w=800',
-    },
-    {
-      id: 4,
-      title: 'Particle Storm VFX',
-      description: 'Advanced particle simulation and visual effects compositing for cinematic sequences',
-      category: 'VFX',
-      image: 'https://images.pexels.com/photos/2832382/pexels-photo-2832382.jpeg?auto=compress&cs=tinysrgb&w=800',
-    },
-    {
-      id: 5,
-      title: 'Product Visualization',
-      description: 'Photorealistic product rendering with advanced material shading and lighting',
-      category: 'CGI',
-      image: 'https://images.pexels.com/photos/159886/pexels-photo-159886.jpeg?auto=compress&cs=tinysrgb&w=800',
-    },
-    {
-      id: 6,
-      title: 'Motion Graphics Reel',
-      description: 'Dynamic motion design combining 3D elements with stunning visual effects',
-      category: 'VFX',
-      image: 'https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=800',
-    },
-  ];
+const projects: Project[] = [
+  {
+    id: 1,
+    title: 'Neon City Chronicles',
+    description: 'Cinematic 3D cityscape created in Blender',
+    category: '3D',
+    reelUrl: 'https://www.instagram.com/reel/DIG17_mM4VP/',
+  },
+  {
+    id: 2,
+    title: 'Abstract Dimensions',
+    description: '3D geometric visualization',
+    category: '3D',
+    reelUrl: 'https://www.instagram.com/reel/DBwrtp_IoHZ/',
+  },
+  {
+    id: 3,
+    title: 'Studio Production Setup',
+    description: 'Behind-the-scenes 3D workflow',
+    category: 'CGI',
+    reelUrl: 'https://www.instagram.com/reel/C_Kp9OcRN2R/',
+  },
+  {
+    id: 4,
+    title: 'Product Visualization',
+    description: 'Photorealistic CGI render',
+    category: 'CGI',
+    reelUrl: 'https://www.instagram.com/reel/C6biND_SAaK/',
+  },
+
+  // VFX
+  {
+    id: 5,
+    title: 'Particle Storm VFX',
+    description: 'Advanced particle simulation',
+    category: 'VFX',
+    reelUrl: 'https://www.instagram.com/reel/DQ8ZQOViL_T/',
+  },
+  {
+    id: 6,
+    title: 'Motion Graphics Reel',
+    description: 'Dynamic motion design',
+    category: 'VFX',
+    reelUrl: 'https://www.instagram.com/reel/DOJdNKBiSGK/',
+  },
+  {
+    id: 7,
+    title: 'Motion Graphics Reel',
+    description: 'Dynamic motion design',
+    category: 'VFX',
+    reelUrl: 'https://www.instagram.com/reel/DN91Ss_iAZ7/',
+  },
+  {
+    id: 8,
+    title: 'Motion Graphics Reel',
+    description: 'Dynamic motion design',
+    category: 'VFX',
+    reelUrl: 'https://www.instagram.com/reel/DOtnRnNgOxz/',
+  },
+];
+
+const openReel = (url: string) => {
+  window.open(url, '_blank', 'noopener,noreferrer');
+};
+
 
   const filteredProjects =
     activeCategory === 'All'
@@ -98,9 +120,13 @@ function Portfolio() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
             <div
-              key={project.id}
-              className="group relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105"
-            >
+  key={project.id}
+  onClick={() => openReel(project.reelUrl)}
+  className="group relative bg-white/5 rounded-2xl overflow-hidden border border-white/10
+             hover:border-purple-500/50 transition-all duration-300 hover:scale-105
+             cursor-pointer"
+>
+
               <div className="absolute top-4 left-4 z-10">
                 <span className="px-3 py-1 bg-purple-600 text-white text-xs font-semibold rounded-full">
                   {project.category}
@@ -108,11 +134,38 @@ function Portfolio() {
               </div>
 
               <div className="relative h-64 overflow-hidden bg-gradient-to-br from-purple-900/20 to-cyan-900/20">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+                <div className="relative h-64 overflow-hidden bg-black">
+<div className="relative aspect-[9/16] overflow-hidden bg-black rounded-xl">
+  <a
+    href={project.reelUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="block w-full h-full"
+  >
+<iframe
+  src={`${project.reelUrl}embed`}
+  loading="lazy"
+  className="w-full h-full pointer-events-none scale-[1.12] group-hover:scale-[1.2]
+             transition-transform duration-500"
+  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+  allowFullScreen
+></iframe>
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e27] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+
+    {/* Hover Play Indicator */}
+    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+      <div className="bg-white/20 backdrop-blur-md rounded-full p-4">
+        ▶
+      </div>
+    </div>
+  </a>
+</div>
+
+
+  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e27] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+</div>
+
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e27] via-transparent to-transparent opacity-60"></div>
               </div>
 
@@ -121,7 +174,14 @@ function Portfolio() {
                   <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">
                     {project.title}
                   </h3>
-                  <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition-colors flex-shrink-0" />
+                  <ExternalLink
+  onClick={(e) => {
+    e.stopPropagation();
+    openReel(project.reelUrl);
+  }}
+  className="w-5 h-5 text-gray-400 hover:text-cyan-400 transition-colors
+             flex-shrink-0 cursor-pointer"
+/>
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed">{project.description}</p>
               </div>

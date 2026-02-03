@@ -1,4 +1,6 @@
 import { Sparkles, ArrowRight } from 'lucide-react';
+import InteractiveSphere from './InteractiveSphere';
+
 
 interface HeroProps {
   scrollToSection: (section: string) => void;
@@ -45,21 +47,13 @@ function Hero({ scrollToSection }: HeroProps) {
         </div>
 
         <div className="relative hidden lg:flex items-center justify-center">
-          <div className="relative w-96 h-96">
+          <div className="relative w-96 h-96 overflow-hidden rounded-full">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 rounded-full blur-3xl animate-pulse"></div>
             <div className="relative w-full h-full rounded-full bg-gradient-to-br from-purple-900/20 to-cyan-900/20 border border-purple-500/20 flex items-center justify-center overflow-hidden">
-              <div className="grid grid-cols-6 gap-2 p-8">
-                {Array.from({ length: 36 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-600/40 to-cyan-600/40 border border-cyan-500/30"
-                    style={{
-                      animationDelay: `${i * 0.05}s`,
-                      animation: 'float 3s ease-in-out infinite',
-                    }}
-                  ></div>
-                ))}
-              </div>
+              <div className="w-full h-full">
+  <InteractiveSphere />
+</div>
+
             </div>
           </div>
         </div>

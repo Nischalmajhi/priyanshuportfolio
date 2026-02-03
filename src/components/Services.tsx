@@ -18,9 +18,9 @@ function Services() {
     },
     {
       icon: Sparkles,
-      title: 'Visual Storytelling',
+      title: 'Video Editing & Motion Graphics',
       description:
-        'Crafting compelling visual narratives through cinematic renders and creative 3D design work.',
+        'Expert video editing and motion graphics to enhance storytelling and visual appeal.',
       color: 'blue',
     },
   ];

@@ -121,71 +121,68 @@ const openReel = (url: string) => {
           {filteredProjects.map((project) => (
             <div
   key={project.id}
-  onClick={() => openReel(project.reelUrl)}
   className="group relative bg-white/5 rounded-2xl overflow-hidden border border-white/10
-             hover:border-purple-500/50 transition-all duration-300 hover:scale-105
-             cursor-pointer"
+             hover:border-purple-500/50 transition-all duration-300 hover:scale-105"
 >
+  {/* Category badge */}
+  <div className="absolute top-4 left-4 z-20">
+    <span className="px-3 py-1 bg-purple-600 text-white text-xs font-semibold rounded-full">
+      {project.category}
+    </span>
+  </div>
 
-              <div className="absolute top-4 left-4 z-10">
-                <span className="px-3 py-1 bg-purple-600 text-white text-xs font-semibold rounded-full">
-                  {project.category}
-                </span>
-              </div>
+  {/* Reel Preview */}
+  <div className="relative h-64 bg-black overflow-hidden">
+    <iframe
+      src={`${project.reelUrl}embed`}
+      loading="lazy"
+      className="
+        absolute inset-0 w-full h-full
+        scale-[1.8]
+        transition-all duration-500
+        pointer-events-none
+        centered-iframe
+      "
+      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+    />
 
-              <div className="relative h-64 overflow-hidden bg-gradient-to-br from-purple-900/20 to-cyan-900/20">
-                <div className="relative h-64 overflow-hidden bg-black">
-<div className="relative aspect-[9/16] overflow-hidden bg-black rounded-xl">
-  <a
-    href={project.reelUrl}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="block w-full h-full"
-  >
-<iframe
-  src={`${project.reelUrl}embed`}
-  loading="lazy"
-  className="w-full h-full pointer-events-none scale-[1.12] group-hover:scale-[1.2]
-             transition-transform duration-500"
-  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-  allowFullScreen
-></iframe>
-    {/* Overlay */}
-    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e27] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+    {/* Fallback / overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e27] via-transparent to-transparent z-10" />
 
-    {/* Hover Play Indicator */}
-    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-      <div className="bg-white/20 backdrop-blur-md rounded-full p-4">
-        ▶
+    {/* Play indicator */}
+    {/* <div className="absolute inset-0 flex items-center justify-center z-20
+                    opacity-0 group-hover:opacity-100 transition">
+      <div className="bg-white/20 backdrop-blur-md rounded-full px-4 py-2 text-white text-sm">
+        ▶ Play
       </div>
+    </div> */}
+  </div>
+
+  {/* Content */}
+  <div className="p-6 space-y-3 relative z-20">
+    <div className="flex items-start justify-between gap-4">
+      <h3
+        onClick={() => openReel(project.reelUrl)}
+        className="text-xl font-bold text-white hover:text-cyan-400 transition-colors cursor-pointer"
+      >
+        {project.title}
+      </h3>
+
+      <ExternalLink
+        onClick={() => openReel(project.reelUrl)}
+        className="w-5 h-5 text-gray-400 hover:text-cyan-400 transition-colors cursor-pointer"
+      />
     </div>
-  </a>
+
+    <p
+      onClick={() => openReel(project.reelUrl)}
+      className="text-gray-400 text-sm leading-relaxed cursor-pointer hover:text-gray-200 transition-colors"
+    >
+      {project.description}
+    </p>
+  </div>
 </div>
 
-
-  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e27] via-transparent to-transparent opacity-60 pointer-events-none"></div>
-</div>
-
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e27] via-transparent to-transparent opacity-60"></div>
-              </div>
-
-              <div className="p-6 space-y-3">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <ExternalLink
-  onClick={(e) => {
-    e.stopPropagation();
-    openReel(project.reelUrl);
-  }}
-  className="w-5 h-5 text-gray-400 hover:text-cyan-400 transition-colors
-             flex-shrink-0 cursor-pointer"
-/>
-                </div>
-                <p className="text-gray-400 text-sm leading-relaxed">{project.description}</p>
-              </div>
-            </div>
           ))}
         </div>
       </div>
